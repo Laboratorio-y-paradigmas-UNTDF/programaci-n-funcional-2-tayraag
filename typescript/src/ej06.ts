@@ -15,5 +15,14 @@ export function makeGreeter(saludo: string): (nombre: string) => string {
 
 // Fábrica de validadores: ok si no vacío tras trim, error si vacío.
 export function makeRequiredValidator(fieldName: string): (value: string) => Result<string, string> {
-  return 
+  return (value:string): Result<string, string> => {
+    const isValid = value.trim().length > 0;
+    if (isValid){
+      return {status: "ok", value};
+    }
+    return{
+      status: "error",
+      error: `${fieldName} es obligatorio`
+    };
+  };
 }
