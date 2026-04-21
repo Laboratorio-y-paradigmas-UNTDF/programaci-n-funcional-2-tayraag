@@ -41,6 +41,6 @@ export function normalizeUser(u: User): User {
   return{
     ...u,
     name: u.name.trim(),
-    email: u.email.trim().toLocaleLowerCase()
+    email: u.email.trim().toLowerCase()
   };
 }

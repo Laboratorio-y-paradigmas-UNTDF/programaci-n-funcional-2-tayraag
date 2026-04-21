@@ -28,7 +28,6 @@ export function obtenerTotalesActivas(ordenes: Orden[]): number[] {
 export function contarPorCategoria(ordenes: Orden[]): Record<string, number> {
   return ordenes.reduce((acc,orden) =>{
     const cat = orden.categoria;
-    acc[cat] = (acc[cat] || 0) + 1;
-    return acc;
+    return { ...acc, [cat]: (acc[cat] || 0) + 1 };
   }, {} as Record<string, number>);
 }

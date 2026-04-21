@@ -28,7 +28,7 @@ export function validateForm(data: FormData): Result<FormData, string> {
     d.password.length >= 8 ? ok(d) : err("contraseña muy corta");
   const primerChain = chain(ok(data), checkName);
   const segundoChain = chain(primerChain, checkEmail);
-  return chain(segundoChain, checkPassword);
+  return chain(segundoChain, checkPassword); //en una línea chain(chain(chain(ok(data), checkName), checkEmail), checkPassword);
 }
 
 // 400 + error si falla, 200 + user si ok.

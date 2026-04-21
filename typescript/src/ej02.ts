@@ -16,9 +16,8 @@ export function compose<T>(...fns: Array<(x: T) => T>): (x: T) => T {
 // Pipeline que aplica trim, toLowerCase, y agrega @empresa.com si no tiene @.
 export function normalizeEmail(raw: string): string {
   const trim = (s:string) => s.trim();
-  const toLower = (s:string) => s.toLocaleLowerCase();
+  const toLower = (s:string) => s.toLowerCase();
   const addDomain = (s:string) => s.includes('@') ? s : `${s}@empresa.com`
 
-  const pipeline = pipe(trim, toLower, addDomain);
-  return pipeline(raw);
+  return pipe(trim, toLower, addDomain)(raw);
 }
