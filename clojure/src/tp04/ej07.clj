@@ -2,23 +2,29 @@
   "Ejercicio 7 — Partial en Clojure (5 pts). Trazabilidad: F-15"
   (:require [clojure.string :as str]))
 
+;; Defino primero la función base para que 'doble' y 'triple' funcionen, asi hago uso de partial
+(defn multiply [factor n] 
+  (* factor n))
+
 ;; Retorna {:status :ok :value value} si no vacío, {:status :error :error "FIELD es obligatorio"}.
 (defn required-field [field-name value]
-  ;; TODO: implementar
+  (if(seq (clojure.string/trim value)) ;; Si el objeto está vacío, seq retorna nil. Si el objeto tiene elementos/caracteres seq retorna la secuencia misma.
+    {:status :ok :value value}    
+    {:status :error :error (str field-name " es obligatorio")})
   )
 
-(def doble
-  ;; TODO: (partial * 2)
+(def doble 
+  (partial multiply 2)
   )
 
 (def triple
-  ;; TODO: (partial * 3)
+  (partial multiply 3)
   )
 
 (def validate-name
-  ;; TODO: (partial required-field "nombre")
+  (partial required-field "nombre")
   )
 
 (def validate-email
-  ;; TODO: (partial required-field "email")
+  (partial required-field "email")
   )

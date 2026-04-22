@@ -3,20 +3,29 @@
 
 ;; Suma todos los elementos con acumulador. DEBE usar recur.
 (defn sum-list [nums acc]
-  ;; TODO: implementar
+  (if (empty? nums)
+    acc
+    (recur (rest nums) (+ acc (first nums))))
   )
 
 ;; Factorial con acumulador. DEBE usar recur.
 (defn factorial [n acc]
-  ;; TODO: implementar
+  [n]
+  (if (zero? n)
+    acc
+    (recur (dec n) (* n acc)))
   )
 
 ;; Revierte lista con acumulador. DEBE usar recur.
 (defn my-reverse [xs acc]
-  ;; TODO: implementar
+  (if (empty? xs)
+    acc
+    (recur (rest xs) (cons (first xs) acc)))
   )
 
 ;; Cuenta elementos con acumulador. DEBE usar recur.
 (defn my-count [xs acc]
-  ;; TODO: implementar
+  (if (empty? xs)
+    acc
+    (recur (rest xs) (inc acc)))
   )
