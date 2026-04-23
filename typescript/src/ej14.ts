@@ -14,8 +14,7 @@ export function memoize<T, R>(fn: (arg: T) => R): (arg: T) => R {
 
 // Fibonacci recursivo clásico (sin memo).
 export function fibonacci(n: number): number {
-  if (n === 0) return 0;
-  else if (n === 1) return 1;
+  if (n <= 1) return n;
   else return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
@@ -24,5 +23,12 @@ export function callCounter<A extends unknown[], R>(fn: (...args: A) => R): {
   call: (...args: A) => R;
   count: () => number;
 } {
-  throw new Error("TODO: implementar");
+  let counter = 0;
+  return{
+    call: (...args: A): R => {
+      counter++;
+      return fn(...args);
+    },
+    count: () => counter
+  };
 }
