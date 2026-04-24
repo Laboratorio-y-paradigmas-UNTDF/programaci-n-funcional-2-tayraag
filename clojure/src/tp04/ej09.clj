@@ -13,17 +13,18 @@
 ;; Aplica validators en secuencia; para en el primer error.
 (defn validate-field [value & validators]
   (reduce
-    (fn [result v]
-      (if (= :ok (:status result))
-        (v (:value result))
-        result))
+    (fn [acc validator]
+      (if (= (:status acc) :error)
+        acc
+        (validator value)))
     {:status :ok :value value} validators)
   )
 
 (def validate-not-empty
-  (make-validator #(seq (clojure.string/trim %)) "campo vacío")
+  (make-validator (fn [v] (not (str/blank? (str v)))) "campo vacío")
   )
 
 (def validate-email-format
-  (make-validator #(re-matches #".+@.+\..+" %) "email inválido")
-  )
+  (make-validator  (fn [v] (and (str/includes? (str v) "@")
+                                (re-matches #".+@.+\..+" (str v))))"email inválido")
+)

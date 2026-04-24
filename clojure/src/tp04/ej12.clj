@@ -10,8 +10,7 @@
 
 ;; Factorial con acumulador. DEBE usar recur.
 (defn factorial [n acc]
-  [n]
-  (if (zero? n)
+  (if (<= n 1)
     acc
     (recur (dec n) (* n acc)))
   )
